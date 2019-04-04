@@ -1,88 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>CSS Grid Image Gallery!</title>
+    </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>CSS Grid Image Gallery!</title>
-</head>
+    <body>
+        <div class="overlay">
+            <div class="overlay-inner">
+                <button class="close">× Close</button>
+                <img />
+            </div>
+        </div>
 
-<body>
+        <section class="gallery"></section>
 
-  <div class="overlay">
-    <div class="overlay-inner">
-      <button class="close">× Close</button>
-      <img>
-    </div>
-  </div>
+        <style>
+            * {
+                box-sizing: border-box;
+            }
 
-  <section class="gallery">
-  </section>
+            body {
+                padding: 50px;
+                font-family: sans-serif;
+                background: linear-gradient(to right, #f93d66, #6d47d9);
+            }
 
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            h6 {
+                margin: 0 0 5px 0;
+            }
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+            p {
+                margin: 0 0 20px 0;
+            }
 
-    body {
-      padding: 50px;
-      font-family: sans-serif;
-      background: linear-gradient(to right, #F93D66, #6D47D9);
-    }
+            .close {
+                background: none;
+                color: white;
+                border: 0;
+            }
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      margin: 0 0 5px 0;
-    }
+            .gallery {
+            }
 
-    p {
-      margin: 0 0 20px 0;
-    }
+            .overlay {
+                position: fixed;
+                background: rgba(0, 0, 0, 0.7);
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                display: none;
+                z-index: 2;
+            }
 
-    .close {
-      background: none;
-      color: white;
-      border: 0;
-    }
+            .overlay.open {
+                display: grid;
+            }
 
-    .gallery {}
+            .overlay figure {
+                background: white;
+                width: 700px;
+                padding: 20px;
+            }
 
+            .overlay img {
+                width: 100%;
+            }
+        </style>
 
+        <script>
+            const gallery = document.querySelector(".gallery");
+            const overlay = document.querySelector(".overlay");
+            const overlayImage = overlay.querySelector("img");
+            const overlayClose = overlay.querySelector(".close");
 
-    .overlay {
-      position: fixed;
-      background: rgba(0, 0, 0, 0.7);
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      display: none;
-      z-index: 2;
-    }
+            function generateHTML([h, v]) {
+                return `
+                <div class="item h${h} v${v}">
+                  <img src="images/${randomNumber(12)}.jpg">
+                  <div class="item__overlay">
+                  <button>View →</button>
+                  </div>
+                </div>
+              `;
+            }
 
-    .overlay.open {
-      display: grid;
-    }
+            function randomNumber(limit) {
+                return Math.floor(Math.random() * limit) + 1;
+            }
 
-    .overlay figure {
-      background: white;
-      width: 700px;
-      padding: 20px;
-    }
-
-    .overlay img {
-      width: 100%;
-    }
-  </style>
-
-  <script>
-  </script>
-</body>
-
+            const digits = Array.from({ lenght: 50 }, () => [
+                randomNumber(4),
+                randomNumber(4)
+            ]);
+            console.log(digits);
+        </script>
+    </body>
 </html>
